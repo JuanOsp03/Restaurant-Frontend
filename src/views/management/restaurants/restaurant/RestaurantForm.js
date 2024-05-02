@@ -31,7 +31,7 @@ const RestaurantForm = () => {
             setDepartments(lstDepartments.flat());
         }
 
-        const getCities = async() => {
+        const getCities = async(departmentId) => {
             const response = await Axios({url: `http://localhost:1337/api/listcities/${departmentId}`});
             const lstCities = Object.keys(response.data).map(i=> response.data[i]);
             setCities(lstCities.flat());
@@ -77,10 +77,10 @@ const RestaurantForm = () => {
     return(
         <CForm className="row g-3" onSubmit={handleSubmit}>
             <CCol md={12}>
-                <CFormInput type="text" id="restaurantName" label="Name" value={restaurantData.restaurantName} onChange={handleChange} />
+                <CFormInput type="text" id="restaurantName" name="restaurantName" label="Name" value={restaurantData.restaurantName} onChange={handleChange} />
             </CCol>
             <CCol md={12}>
-                <CFormInput type="text" id="restaurantNit" label="Nit" value={restaurantData.restaurantNit} onChange={handleChange} />
+                <CFormInput type="text" id="restaurantNit" name="restaurantNit" label="Nit" value={restaurantData.restaurantNit} onChange={handleChange} />
             </CCol>
             <CCol xs={4}>
                 <CFormSelect id="departmentOptions" label = "Department" value={ selectedDepartment} onChange={handleSelectDepartment} >
@@ -99,10 +99,10 @@ const RestaurantForm = () => {
                 </CFormSelect>
             </CCol>
             <CCol xs={4}>
-                <CFormInput type="text" id="restaurantAddress" label="Address" value={restaurantData.restaurantAddress} onChange={handleChange} />
+                <CFormInput type="text" id="restaurantAddress" name="restaurantAddress" label="Address" value={restaurantData.restaurantAddress} onChange={handleChange} />
             </CCol>
             <CCol md={12}>
-                <CFormInput type="text" id="restaurantPhone" label="Phone" value={restaurantData.restaurantPhone} onChange={handleChange} />
+                <CFormInput type="text" id="restaurantPhone" name="restaurantPhone" label="Phone" value={restaurantData.restaurantPhone} onChange={handleChange} />
             </CCol>
             <CCol xs={12}>
                 <CButton color="primary" type="submit">Save</CButton>
