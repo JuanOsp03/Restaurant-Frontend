@@ -52,9 +52,9 @@ const Restaurant = () => {
     },{
       title:'Options',
       render:(text, record) =>(
-      <div>
-        
-      </div>
+        <div>
+
+        </div>
       ),
     }
   ]
@@ -78,6 +78,7 @@ const Restaurant = () => {
               ))}
             </CTableRow>
           ))}
+          <CButton color='primary'>Modificar</CButton>
         </CTableBody>
       </CTable>
     </div>

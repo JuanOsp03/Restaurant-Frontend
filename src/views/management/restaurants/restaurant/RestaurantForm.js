@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from "react";
 import Axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     CForm,
     CCol,
@@ -10,6 +11,8 @@ import {
 } from '@coreui/react'
 
 const RestaurantForm = () => {
+
+    const navigate = useNavigate();
 
     const [restaurantData, setRestaurantData] = useState({
         restaurantName: '',
@@ -74,6 +77,10 @@ const RestaurantForm = () => {
         }
     }
 
+    function handleCancel(event){
+        navigate('/restaurants/restaurant');
+    }
+
     return(
         <CForm className="row g-3" onSubmit={handleSubmit}>
             <CCol md={12}>
@@ -104,8 +111,11 @@ const RestaurantForm = () => {
             <CCol md={12}>
                 <CFormInput type="text" id="restaurantPhone" name="restaurantPhone" label="Phone" value={restaurantData.restaurantPhone} onChange={handleChange} />
             </CCol>
-            <CCol xs={12}>
+            <CCol xs={2}>
                 <CButton color="primary" type="submit">Save</CButton>
+            </CCol>
+            <CCol xs={10}>
+                <CButton color="secondary" onClick={handleCancel}>Cancel</CButton>
             </CCol>
         </CForm>
     )
