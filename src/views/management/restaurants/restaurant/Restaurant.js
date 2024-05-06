@@ -33,6 +33,22 @@ const Restaurant = () => {
     navigate('/restaurants/restaurantForm');
   }
 
+  function handleEdit (restaurantId){
+    navigate('/restaurants/restaurantForm');
+  }
+
+  const handleDisable = async(restaurantId) =>{
+    try{
+      var url = "http://localhost:1337/api/disablerestaurant/"+restaurantId;
+      const response = await Axios.put(url);
+      window.location.reload();
+    }catch(e){
+      console.log(e);
+    }
+
+  }
+
+
   const columns = [
     {
       title: 'Name',
@@ -75,10 +91,11 @@ const Restaurant = () => {
             <CTableRow key={index}>
               {columns.map((column, columnIndex) => (
                 <CTableDataCell key={columnIndex}> {restaurant[column.dataIndex]} </CTableDataCell>
+                
               ))}
             </CTableRow>
           ))}
-          <CButton color='primary'>Modificar</CButton>
+          <CButton color='primary' onClick={handleUpdate}>Update</CButton>
         </CTableBody>
       </CTable>
     </div>

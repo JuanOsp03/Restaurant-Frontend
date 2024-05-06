@@ -6,7 +6,6 @@ import {
     CCol,
     CFormInput,
     CFormSelect,
-    CFormCheck,
     CButton
 } from '@coreui/react'
 
@@ -28,6 +27,13 @@ const RestaurantForm = () => {
     const [selectedCity, setSelectedCity] = useState('');
 
     useEffect(()=> {
+
+        const getRestaurant = async () => {
+            const response = await Axios({url: `http://localhost:1337/api/getrestaurant/${restaurantId}`})
+            const restaurant = response.data.data
+            setRestaurantData(restaurant);
+        }
+
         const getDepartments = async () => {
             const response = await Axios({url: 'http://localhost:1337/api/listdepartments'});
             const lstDepartments = Object.keys(response.data).map(i=> response.data[i]);
@@ -40,7 +46,9 @@ const RestaurantForm = () => {
             setCities(lstCities.flat());
         }
 
+        // ---
         getDepartments();
+        getRestaurant();
 
         if(selectedDepartment !== "")
             getCities(selectedDepartment);
