@@ -27,13 +27,22 @@ const RestaurantEditForm = () => {
 
     useEffect(() =>{
         
-        const getRestaurants = async() =>{
+        /*const getRestaurants = async() =>{
             const response = await Axios({
             url: 'http://localhost:1337/api/listrestaurant'
             });
             const lstRestaurants = Object.keys(response.data).map(i=> response.data[i]);
             setRestaurantData(lstRestaurants.flat());
+        }*/
+
+        const getRestaurant = async () => {
+            console.log(restaurantId);
+            const response = await Axios({url: `http://localhost:1337/api/getrestaurant/${restaurantId}`})
+            const restaurant = response.data.data
+            setRestaurantData(...restaurant)
         }
+        
+        getRestaurant();
 
         const getDepartments = async () => {
             const response = await Axios({url: 'http://localhost:1337/api/listdepartments'});

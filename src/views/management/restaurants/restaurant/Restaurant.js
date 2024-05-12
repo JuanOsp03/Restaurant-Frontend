@@ -34,7 +34,7 @@ const Restaurant = () => {
   }
 
   function handleEdit (restaurantId){
-    navigate('/restaurants/restaurantForm');
+    navigate(`/restaurants/restaurantEditForm/${restaurantId}`);
   }
 
   const handleDisable = async(restaurantId) =>{
@@ -67,9 +67,10 @@ const Restaurant = () => {
       dataIndex:'cityId'
     },{
       title:'Options',
-      render:(text, record) =>(
+      render:(restaurantId) =>(
         <div>
-
+          <CButton color='primary' onClick={() => handleEdit(restaurantId)}>Edit</CButton>
+          <CButton color='danger' onClick={() => handleDisable(restaurantId)}>Delete</CButton>
         </div>
       ),
     }
@@ -90,12 +91,13 @@ const Restaurant = () => {
           {restaurantData.map((restaurant, index) => (
             <CTableRow key={index}>
               {columns.map((column, columnIndex) => (
-                <CTableDataCell key={columnIndex}> {restaurant[column.dataIndex]} </CTableDataCell>
-                
+                <CTableDataCell key={columnIndex}> 
+                  {column.title === 'Options' ? column.render(restaurant.restaurantId) : restaurant[column.dataIndex]}
+                </CTableDataCell>
               ))}
             </CTableRow>
           ))}
-          <CButton color='primary' onClick={handleUpdate}>Update</CButton>
+          
         </CTableBody>
       </CTable>
     </div>
